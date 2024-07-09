@@ -92,6 +92,16 @@ set pwsh=powershell.exe -ExecutionPolicy Bypass -File
 
 
 
+Caveats
+-------
+
+* The date format template is rendered verbatim, rather than replaced with
+  the expected digits. &rarr; There are probably literal double quotes (`"`)
+  in the value of the date suffix variable, probably from using Unix-like
+  quotes in a Windows `set` command.
+
+
+
 Known issues
 ------------
 
