@@ -81,6 +81,8 @@ set pwsh=powershell.exe -ExecutionPolicy Bypass -File
 %pwsh% http_put.ps1 http://example.net/webdav/ http://upload.test/ package.json README.md
 ```
 
+… or use [`http_put.cmd`](http_put.cmd).
+
 * `-ExecutionPolicy` seems to be a type of noob protection to prevent easy
   double-click execution of email attachments, similar to the
   "I trust this file" checkbox that you have to set on downloaded ZIP files
