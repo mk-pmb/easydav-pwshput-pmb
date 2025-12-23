@@ -55,21 +55,25 @@ function uploadOneFileToOneServer($baseUrl, $fileName) {
   $fileStream = [System.IO.File]::OpenRead($fileName)
   $bytesCopied = $fileStream.CopyTo($body)
   if ($bytesCopied -ne $fileSize) {
-    # throw "Incomplete upload: Sent $bytesCopied of $fileSize bytes."
+    $errMsg = "Incomplete upload: Sent $bytesCopied of $fileSize bytes."
+    # throw [System.Net.WebException] $errMsg
   }
   $fileStream.Close()
   $body.Close()
 
-  try {
-    $rsp = $req.GetResponse()
+  $rsp = $req.GetResponse()
+  $codeCateg = [math]::Floor($rsp.StatusCode.value__ / 100)
+  if ($codeCateg -eq 2) {
     Write-Host "D: Success: Uploaded $fileName -> $destUrl"
+  } elseif ($codeCateg -eq 3) {
+    Write-Error "W: Request was redirected (HTTP/$($rsp.StatusCode
+      )) unexpectedly: $($rsp.StatusDescription)"
+  } else {
+    throw [System.Net.WebException] "Request failed with status HTTP/$(
+      $rsp.StatusCode): $($rsp.StatusDescription)"
   }
-  catch {
-    Write-Error "W: Request failed: $($_.Exception.Message)"
-  }
-  finally {
-    $rsp.Dispose()
-  }
+
+  if ($rsp) { $rsp.Dispose() }
 }
 
 

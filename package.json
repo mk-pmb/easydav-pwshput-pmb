@@ -1,7 +1,7 @@
 { "name": "easydav-pwshput-pmb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PowerShell script to upload (HTTP PUT) files onto a WebDAV or regular HTTP server.",
-  "keywords": [ ":TODO:" ],
+  "keywords": [],
 
   "author": "M.K. (https://github.com/mk-pmb)",
   "homepage": "https://github.com/mk-pmb/easydav-pwshput-pmb/#readme",
